@@ -15,11 +15,7 @@ export class ListRenderComponent {
 
   animals: Animal[] = [];
 
-  cars: Car[] = [
-    {model: 'Palio', brand: 'FIAT', engine: 1.0, year: 2013},
-    {model: 'Onix', brand: 'Chevrolet', engine: 1.4, year: 2020 },
-    {model: 'Jetta', brand: 'Volkswagen', engine: 2.0, year: 2023}
-  ];
+  cars: Car[] = [];
 
   animalDetails = '';
   showAge(animal: Animal) {
@@ -33,7 +29,9 @@ export class ListRenderComponent {
 
   removeAnimal(animal: Animal) {
     console.log('Removing animal...');
-    this.animals = this.listService.remove(this.animals, animal);
+    
+    this.animals = this.animals.filter((a) => animal.name !== a.name);
+    this.listService.remove(animal.id).subscribe();
   }
 
   getAnimals(): void {
